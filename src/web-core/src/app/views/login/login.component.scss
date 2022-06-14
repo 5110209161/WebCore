@@ -13,6 +13,11 @@
   line-height: 1.5;
 }
 
+// style of error message
+.error-msg-block {
+  color: red;
+}
+
 // style of login logo
 .login-logo {
   display: flex;
@@ -38,7 +43,7 @@
 
 // style of input box
 .input-block {
-   display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 2em;
@@ -76,4 +81,12 @@
   margin-top: 1em;
   min-width: 250px;
   gap: 0.5em;
+}
+
+// style of splitor
+.splitor {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
