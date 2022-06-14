@@ -1,1 +1,10 @@
-<p>dashboard works!</p>
+<div class="layout-wrapper" [ngClass]="{'layout-news-active': newsActive}">
+  <app-layout-news *ngIf="newsActive" (onNewsHide)="hideNews()"></app-layout-news>
+  <app-layout-topbar (menuButtonClick)="onMenuButtonClick()"></app-layout-topbar>
+  <app-layout-menu [active]="menuActive"></app-layout-menu>
+  <div class="layout-mask" [ngClass]="{'layout-mask-active': menuActive}" (click)="onMaskClick()"></div>
+  <div class="layout-content">
+    <router-outlet></router-outlet>
+  </div>
+  <app-layout-footer></app-layout-footer>
+</div>

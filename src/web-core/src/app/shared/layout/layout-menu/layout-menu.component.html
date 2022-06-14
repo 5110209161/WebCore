@@ -1,0 +1,40 @@
+<div class="layout-sidebar" [ngClass]="{'active': active}">
+  <!--logo-->
+  <a [routerLink]="['/']" class="logo">
+      <!-- <img alt="logo" [src]="'assets/images/' + (config.dark ? 'primeng-logo-light.svg' : 'primeng-logo-dark.svg')" /> -->
+      <img alt="logo" src="assets/images/libraryLogo.png">
+  </a>
+  <!--search box-->
+  <div class="layout-sidebar-filter p-fluid p-input-filled">
+      <p-autoComplete [group]="true" [(ngModel)]="selectedRoute" [minLength]="2" [suggestions]="filteredRoutes" 
+                      scrollHeight="300px"  field="label" placeholder="Search by name..."
+                      (onSelect)="onSelect($event)" (completeMethod)="filterGroupedRoute($event)">
+      </p-autoComplete>
+  </div>
+  <!--menu-->
+  <div class="layout-menu">
+    <ng-container *ngFor="let element of routes">
+      <ng-container *ngIf="!element.isSubItem; else subMenuBlock">
+        <div class="menu-category">{{ element.label }}</div>
+        <div class="menu-items" *ngIf="element.items">
+          <ng-container *ngFor="let item of element.items">
+            <a [routerLink]="item.value" routerLinkActive="router-link-exact-active">{{ item.label }}</a>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!--sub menu-->
+      <ng-template #subMenuBlock>
+        <div class="menu-items">
+          <a tabindex="0" (click)="toggleSubmenu($event, '/table')">{{ element.label }}</a>
+          <div [@submenu]="isSubmenuActive('/table') ? 'visible': 'hidden'" (@submenu.done)="onAnimationDone()">
+            <ul *ngIf="element.items">
+              <li *ngFor="let item of element.items">
+                <a [routerLink]="item.value" routerLinkActive="router-link-exact-active" [routerLinkActiveOptions]="{exact:true}">{{ item.label }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
